@@ -1,0 +1,2 @@
+Product [id=6, name=iPhone 16 Pro, Description=iPhone, category=mobile, createDate=Mon Oct 21 00:00:00 GMT+08:00 2024]
+Product [id=7, name=iPhone 14 Pro, Description=iPhone, category=mobile, createDate=Mon Oct 21 00:00:00 GMT+08:00 2024]
