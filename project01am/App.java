@@ -120,6 +120,12 @@ public class App {
 
         mapObjectList.entrySet().stream().sorted(Entry.comparingByKey()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         
+        // calling functional interface method through the class
+        ArithmaticOperation ao = new ArithmaticOperation();
+        Integer addResults = ao.AddOperation(2, 3);
+        System.out.println("Addition Results: " + addResults);
+
+
 
         // Given 4digits or 4 alphabets
         // Find the number of permutations
@@ -166,6 +172,7 @@ public class App {
         // String a : combinations) {
         //     System.out.println(a.toString());
         // }
+
 
     }
 }
