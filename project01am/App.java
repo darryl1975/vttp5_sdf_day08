@@ -1,4 +1,5 @@
 import java.io.BufferedWriter;
+import java.io.Console;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,14 +12,19 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
+// import ArithmaticOperation;
+// import Product;
 
 public class App {
 
@@ -84,25 +90,25 @@ public class App {
         // "Christopher"
         // sort ascending and print
         // sort descending and print
-        // String arr[] = { "Bernard", "Zachary", "Alpha", "Theophilis", "Sammy", "Christopher" };
+        // String arr[] = { "Bernard", "Zachary", "Alpha", "Theophilis", "Sammy",
+        // "Christopher" };
         // Arrays.sort(arr);
         // System.out.println("Ascending order: " + arr.toString());
 
         // Arrays.sort(arr, Collections.reverseOrder());
         // System.out.println("Descending order: " + arr.toString());
 
-
         // Threading recap
-        MyImplementation myImpl01 = new MyImplementation();
-        MyImplementation myImpl02 = new MyImplementation();
-        MyImplementation myImpl03 = new MyImplementation();
+        // MyImplementation myImpl01 = new MyImplementation();
+        // MyImplementation myImpl02 = new MyImplementation();
+        // MyImplementation myImpl03 = new MyImplementation();
 
-        ExecutorService es = Executors.newFixedThreadPool(3);
-        es.execute(myImpl01);
-        es.execute(myImpl02);
-        es.execute(myImpl03);
-        es.shutdown();
-        
+        // ExecutorService es = Executors.newFixedThreadPool(3);
+        // es.execute(myImpl01);
+        // es.execute(myImpl02);
+        // es.execute(myImpl03);
+        // es.shutdown();
+
         // Create Map objects
         // Sort the map object
         Map<String, Integer> mapObjectList = new HashMap<>();
@@ -118,61 +124,38 @@ public class App {
         mapList.sort(Entry.comparingByKey());
         mapList.forEach(System.out::println);
 
-        mapObjectList.entrySet().stream().sorted(Entry.comparingByKey()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-        
+        mapObjectList.entrySet().stream().sorted(Entry.comparingByKey())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
         // calling functional interface method through the class
         ArithmaticOperation ao = new ArithmaticOperation();
         Integer addResults = ao.AddOperation(2, 3);
         System.out.println("Addition Results: " + addResults);
 
-
-
         // Given 4digits or 4 alphabets
         // Find the number of permutations
         // put the permutation into Set Collection
-        // String word = "ABCD";
-        // String[] chr = new String[word.length()];
-        // for (int i = 0; i < word.length(); i++) {
-        //     chr[i] = String.valueOf(word.charAt(i));
-        // }
+        String word = "";
+        Console console = System.console();
+        word = console.readLine("Enter a word to compute permutations: ");
+        permutations(word);
 
-        // List<String> combinations = new ArrayList<>();
+    }
 
-        // int loop = 0;
-        // while (loop < word.length()) {
-        //     int count = 0;
-        //     for (int i = 0; i < word.length(); i++) {
-        //         String temp = "";
-        //         temp = chr[i];
+    public static void permutations(String str) {
+        List<String> ans = new ArrayList<>(); // ArrayList
 
-        //         for (int j = i + 1; j < word.length(); j++) {
-        //             temp = temp + chr[j];
-        //         }
-        //         if (temp.length() == word.length())
-        //             combinations.add((temp));
+        ans.add(String.valueOf(str.charAt(0)));
 
-        //     }
+        for (int i = 1; i < str.length(); i++) {
+            for (int j = ans.size() - 1; j >= 0; j--) {
+                String temp = ans.remove(j);
+                for (int k = 0; k <= temp.length(); k++) {
+                    ans.add(temp.substring(0, k) + str.charAt(i) + temp.substring(k));
+                }
+            }
+        }
 
-        //     String tmp = "";
-        //     tmp = chr[count]; 
-        //     for(int cnt = 0; cnt < word.length(); cnt++) {
-        //         if (cnt < (word.length() -1)){
-        //             chr[cnt] = chr[cnt + 1];
-        //         }
-        //         else {
-        //             chr[cnt] = tmp;
-        //         } 
-        //     } 
-
-        //     loop++;
-        // }
-
-        // for (
-
-        // String a : combinations) {
-        //     System.out.println(a.toString());
-        // }
-
-
+        System.out.println("Array size: " + ans.size() + " > " + ans);
     }
 }
